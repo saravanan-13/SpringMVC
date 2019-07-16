@@ -72,6 +72,7 @@ public class MySQLEmployeeDAOImpl implements EmployeeDAO {
 
 		// Method - 2
 
+		System.out.println("MYSQL DAO");
 		List<Employee> employeeList = jdbcTemplate.query("select * from employee",
 				(rs, rowNum) -> new Employee(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4)));
 		return employeeList;
