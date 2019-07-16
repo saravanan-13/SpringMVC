@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body style="text-align: center;">
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<h1>Details of ${employee.name} </h1>
 	<br>
