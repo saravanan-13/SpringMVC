@@ -1,12 +1,12 @@
 package com.pack.springmvc.controller;
 
-import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pack.springmvc.service.EmployeeService;
@@ -16,26 +16,29 @@ import com.pack.springmvc.model.Employee;
 @RequestMapping("employee")
 public class RegistrationController {
 
+	@Autowired
+	private EmployeeService employeeService;
+	
 	@GetMapping("/displayall")
-	public String displayAll(ModelMap map) {
-			ApplicationContext context = new ClassPathXmlApplicationContext("spring-servlet.xml");
+	public String displayAll(Model model) {
+		model.addAttribute("emplist", employeeService.listAllEmployee());
+		return "displayall";
+	}
 
-		EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
-
-		map.addAttribute("emplist", employeeService.listAllEmployee());
-		
-//		for (Employee emp : emplist) {
-//			System.out.println(emp);
-//		}
+	@GetMapping("/getbyid/{id}")
+	public String getById(@PathVariable("id") int id, Model model) {
+		Employee employee = employeeService.findByIdEmployee(id);
+		model.addAttribute("employee", employee);
 		return "display";
 	}
-
-	@GetMapping("/getbyid")
-	public void getById() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring-servlet.xml");
-		EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
-		Employee employee = employeeService.findByIdEmployee(103);
-		System.out.println(employee);
+	
+	@GetMapping("/registe")
+	public String register() {
+		
+		return "register";
 	}
 
+
+	
+	
 }

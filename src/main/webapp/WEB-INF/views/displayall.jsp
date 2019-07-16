@@ -9,7 +9,7 @@
 <body style="text-align: center;">
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<h1>Details of ${employee.name} </h1>
+	<h1>All the Employee Details of Publicis Sapient</h1>
 	<br>
 	<br>
 	<table border="1" style="margin-left: auto; margin-right: auto;">
@@ -19,12 +19,14 @@
 			<th>Age</th>
 			<th>Salary</th>
 		</tr>
+		<c:forEach items="${emplist}" var="emp">
 			<tr>
-				<td>${employee.id}</td>
-				<td>${employee.name}</td>
-				<td>${employee.age}</td>
-				<td>${employee.salary}</td>
+				<td>${emp.id}</td>
+				<td>${emp.name}</td>
+				<td>${emp.age}</td>
+				<td>${emp.salary}</td>
 			</tr>
+		</c:forEach>
 	</table>
 	<br>
 	<br>
